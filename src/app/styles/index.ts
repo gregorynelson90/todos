@@ -18,18 +18,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontFamily: 'Roboto',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    borderRadius: 8,
   },
   touchable: { marginVertical: 10 },
   completed: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'green',
+    borderRadius: 8,
   },
   failure: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'red',
+    borderRadius: 8,
   },
 });
 export default styles;
