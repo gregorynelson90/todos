@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {toDo} from '../types';
 import { RootState } from '../store';
-import ListItem from '../../components/ListItem';
 
 interface TodosState {
   todos: Array<toDo>;

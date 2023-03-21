@@ -1,11 +1,5 @@
-import React, {  useState, useEffect } from 'react';
-import {
-  FlatList,
-  TextInput,
-  SafeAreaView,
-  Button,
-  View,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, TextInput, SafeAreaView, Button, View } from 'react-native';
 import useToDoList from '../app/hooks/useToDoList';
 import { toDo } from '../app/types/index';
 import { add, clear, filter, selectTodos } from '../app/reducers/todosReducer';
@@ -19,6 +13,10 @@ const Todos = () => {
   const [getToDos, saveToDos] = useToDoList();
   const dispatch = useDispatch();
   const data: Array<toDo> = state.todos;
+  const handleOnPress = () => {
+    dispatch(add(textInput));
+    setTextInput('');
+  };
 
   useEffect(() => {
     getToDos();
@@ -36,11 +34,7 @@ const Todos = () => {
         onChangeText={text => setTextInput(text)}
       />
       <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-        <Button
-          title={'Add a Task'}
-          color={'green'}
-          onPress={() => dispatch(add(textInput))}
-        />
+        <Button title={'Add a Task'} color={'green'} onPress={handleOnPress} />
         <Button
           title={'Filter Tasks'}
           color={'purple'}
