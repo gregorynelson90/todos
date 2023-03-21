@@ -1,20 +1,26 @@
 import React, { Text, TouchableOpacity, View } from 'react-native';
-import styles from '../styles/index'
-import { useSelector, useDispatch } from 'react-redux';
-import { toDo } from '../types';
-import { remove, complete} from '../reducers/todosReducer'
+import styles from '../app/styles/index';
+import { useDispatch } from 'react-redux';
+import { remove, complete } from '../app/reducers/todosReducer';
+import { useState } from 'react';
 
-
-
-const ListItem = (item: toDo) => {
+interface ListProps {
+  task: string;
+  id: number;
+  completed: boolean;
+}
+const ListItem = ({ task, id, completed }: ListProps) => {
+  const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
-  
+
+  const toggleChecked = () => {
+    setChecked(!checked);
+    dispatch(complete(id));
+  };
   return (
-    <TouchableOpacity
-      onLongPress={() => dispatch(remove(item.id))}
-      onPress={() => dispatch(complete(item.id))}>
-      <View style={item.completed ? styles.completed : styles.failure}>
-        <Text>{item.task}</Text>
+    <TouchableOpacity style={styles.touchable} onPress={toggleChecked}>
+      <View style={completed ? styles.completed : styles.failure}>
+        <Text style={styles.text}>{task}</Text>
       </View>
     </TouchableOpacity>
   );

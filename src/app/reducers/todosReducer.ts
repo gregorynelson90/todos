@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {toDo} from '../types';
 import { RootState } from '../store';
+import ListItem from '../../components/ListItem';
 
 interface TodosState {
   todos: Array<toDo>;
@@ -21,26 +22,27 @@ export const todosReducer = createSlice({
       ];
     },
     remove: (state, action: PayloadAction<number>) => {
-      state.todos.filter(item => item.id != action.payload);
+      state.todos = state.todos.filter(item => item.id !== action.payload);
     },
     complete: (state, action: PayloadAction<number>) => {
       state.todos.map(item => {
-        if (item.id === action.payload) {
-          return {...item, completed: true};
-        }
-        return item;
+        item.id == action.payload ? item.completed = !item.completed : item; 
       });
     },
     clear: state => {
       state.todos = [];
     },
     load: (state, action: PayloadAction<Array<toDo>>) => {
+      console.log('Entering load' + action.payload);
       state.todos = action.payload;
+    },
+    filter: state => {
+      state.todos = state.todos.filter(item => item.completed !== true);
     },
   },
 });
 
-export const {add, remove, complete, clear, load} = todosReducer.actions;
+export const {add, remove, complete, clear, load, filter} = todosReducer.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectTodos = (state: RootState) => state.todos;
