@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, TextInput, SafeAreaView, Button, View } from 'react-native';
-import useToDoList from '../app/hooks/useToDoList';
-import { toDo } from '../app/types/index';
-import { add, clear, filter, selectTodos } from '../app/reducers/todosReducer';
+import useToDoList from '../hooks/useToDoList';
+import { toDo } from '../types/index';
+import { add, clear, filter, selectTodos } from '../reducers/todosReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import ListItem from './ListItem';
-import styles from '../app/styles';
+import styles from '../styles';
 
 const Todos = () => {
   const [textInput, setTextInput] = useState('');
@@ -20,10 +20,11 @@ const Todos = () => {
 
   useEffect(() => {
     getToDos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     saveToDos(state.todos);
-  }, [state.todos]);
+  }, [saveToDos, state.todos]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,7 +34,7 @@ const Todos = () => {
         placeholder="Add a Task"
         onChangeText={text => setTextInput(text)}
       />
-      <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+      <View style={styles.buttonContainer}>
         <Button title={'Add a Task'} color={'green'} onPress={handleOnPress} />
         <Button
           title={'Filter Tasks'}
@@ -48,7 +49,7 @@ const Todos = () => {
       </View>
       <FlatList
         style={styles.flatList}
-        keyExtractor={(toDo: toDo) => toDo.id.toString()}
+        keyExtractor={item => item.id.toString()}
         data={data}
         renderItem={({ item }) => {
           return (

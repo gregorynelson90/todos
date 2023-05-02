@@ -1,7 +1,7 @@
 import React, { Text, TouchableOpacity, View } from 'react-native';
-import styles from '../app/styles/index';
+import styles from '../styles/index';
 import { useDispatch } from 'react-redux';
-import { complete } from '../app/reducers/todosReducer';
+import { complete } from '../reducers/todosReducer';
 import { useState } from 'react';
 
 interface ListProps {

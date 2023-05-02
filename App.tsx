@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDos from './src/components/Todos';
+import ToDos from './src/app/components/Todos';
 
 
 function App(): JSX.Element {

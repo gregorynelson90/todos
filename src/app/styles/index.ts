@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 8,
   },
+  buttonContainer: { flexDirection: 'row', justifyContent: 'space-evenly' },
 });
 export default styles;
